@@ -19,4 +19,34 @@ function getAPICall($website) {
     return $result;
 }
 
+function postAPICall($website, $data) {
+    $postInit = curl_init();
+
+    //set URL
+    curl_setopt($postInit, CURLOPT_URL, $website);
+
+    //set data
+    curl_setopt($postInit, CURLOPT_POST, 1);
+    if($data) {
+        curl_setopt($postInit, CURLOPT_POSTFIELDS, $data);
+    }
+    
+    //set other options
+    curl_setopt($postInit, CURLOPT_HTTPHEADER, array(
+        'Content-Type: application/json',
+        'Contetn-Length: ' . strlen($data)
+    ));
+    curl_setopt($postInit, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($postInit, CURLOPT_FAILONERROR, true);
+
+
+    //execution
+    $result = curl_exec($postInit);
+
+    curl_close($postInit);
+
+    return $result;
+}
+
+
 ?>
