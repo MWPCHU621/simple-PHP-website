@@ -49,4 +49,32 @@ function postAPICall($website, $data) {
 }
 
 
+function callAPI($method, $website, $data) {
+    $init = curl_init($website);
+
+    //general setup irregardless of type of CURL operation.
+    curl_setopt($init, CURLOPT_URL, $website);
+    curl_setopt($init, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($init, CURLOPT_FAILONERROR, true);
+    curl_setopt($init, CURLOPT_HTTPHEADER, array(
+        'Content-Type: application/json',
+        'Contetn-Length: ' . strlen($data)
+    ));
+
+    if($method == "POST") {
+        curl_setopt($init, CURLOPT_POST, 1);
+            if($data) 
+                curl_setopt($init, CURLOPT_POSTFIELDS, $data);
+    }
+
+    $response = curl_exec($init);
+
+    $result = json_decode($response);
+
+    curl_close($init);
+
+    return $result;
+
+}
+
 ?>

@@ -5,7 +5,7 @@
         <?php include 'functions.php'; ?>
     </head>
     <body>
-        <?php $dataset = getAPICall("https://jsonplaceholder.typicode.com/posts/") ?>
+        <?php $dataset = callAPI("GET", "https://jsonplaceholder.typicode.com/posts/", "") ?>
         <header>
             <nav id="navigation">
                 <ul>
@@ -36,12 +36,11 @@
             );
             $dataStr = json_encode($data);
 
-            $post = postAPICall("https://jsonplaceholder.typicode.com/posts/", $dataStr);
-            $response = json_decode($post, true);
+            $post = callAPI("POST", "https://jsonplaceholder.typicode.com/posts/", $dataStr);
 
             ?>
 
-            <?php print_r($response);?>
+            <?php print_r($post);?>
 
         </div>
         
