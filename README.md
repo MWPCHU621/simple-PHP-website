@@ -4,4 +4,6 @@
 ### instructions
     1. fork and download project zip folder
     2. unzip folder and move into the folder.
-    2. run `php ./main.php ` on cygwin with php, curl packages installed.
+    3. run 
+    ```php ./main.php ```
+     on cygwin with php, curl packages installed.
